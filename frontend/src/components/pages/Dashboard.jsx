@@ -1,6 +1,6 @@
 import { Button, CssBaseline, Grid, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import ChangePassword from './auth/ChangePassword';
+// import ChangePassword from './auth/ChangePassword';
 
 const Dashboard = () => {
   const navigate = useNavigate()
@@ -17,9 +17,9 @@ const Dashboard = () => {
         <Typography variant='h6'>Name: Sonam</Typography>
         <Button variant='contained' color='warning' size='large' onClick={handleLogout} sx={{ mt: 8 }}>Logout</Button>
       </Grid>
-      <Grid item sm={8}>
+      {/* <Grid item sm={8}>
         <ChangePassword />
-      </Grid>
+      </Grid> */}
     </Grid>
   </>;
 };
