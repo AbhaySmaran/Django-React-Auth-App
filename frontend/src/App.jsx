@@ -3,7 +3,7 @@ import Layout from './components/pages/Layout'
 import Contact from './components/pages/Contact';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './components/pages/Home';
-import LoginReg from './components/pages/LoginReg';
+import LoginReg from './components/pages/auth/LoginReg';
 import SendPasswordResetEmail from './components/pages/auth/SendPasswordResetEmail';
 import ResetPassword from './components/pages/auth/ResetPassword';
 import Dashboard from './components/pages/Dashboard';
