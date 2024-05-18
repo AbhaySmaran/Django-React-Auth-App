@@ -1,11 +1,16 @@
 import { Box, TextField, Button, Alert } from '@mui/material';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 const ChangePassword = () => {
   const [error, setError] = useState({
     status: false,
     msg: "",
     type: ""
   });
+
+  navigate = useNavigate()
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -18,6 +23,7 @@ const ChangePassword = () => {
         console.log(actualData);
         document.getElementById("password-change-form").reset();
         setError({ status: true, msg: "Password Changed Successful", type: "success" });
+        navigate('/')
       } else {
         setError({ status: true, msg: "Password and Confirm Password Doesn't Match", type: "error" })
       }
