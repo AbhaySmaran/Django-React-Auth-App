@@ -11,7 +11,7 @@ export const authSlice = createSlice({
     setUserToken: (state, action) => {
         state.access_token = action.payload.access_token
     },
-    unSetetUserToken: (state, action) => {
+    unSetUserToken: (state, action) => {
         state.access_token = action.payload.access_token
     },
 
@@ -19,6 +19,6 @@ export const authSlice = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const { setUserToken, unSetetUserToken } = authSlice.actions
+export const { setUserToken, unSetUserToken } = authSlice.actions
 
 export default authSlice.reducer

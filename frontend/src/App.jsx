@@ -9,7 +9,7 @@ import ResetPassword from './components/pages/auth/ResetPassword';
 import Dashboard from './components/pages/Dashboard';
 import ProductDetail from './components/functions/product-details';
 import { useSelector } from 'react-redux';
-// import Products from './components/functions/Products';
+import Products from './components/functions/Products';
 
 function App() {
   const { access_token } = useSelector(state=> state.auth)
@@ -25,9 +25,8 @@ function App() {
             <Route path='reset' element={<ResetPassword />} />
             <Route path='products/:id' element={<ProductDetail />} />
             <Route path='dashboard' element={<Dashboard />} />
-            {/* <Route path='products' element={<Products />} /> */}
           </Route>
-          
+          <Route path='/products' element={<Products />} />
         </Routes>
       </Router>
     </>

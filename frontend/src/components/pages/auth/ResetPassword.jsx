@@ -15,10 +15,10 @@ const ResetPassword = () => {
     const data = new FormData(e.currentTarget);
     const actualData = {
       password: data.get('password'),
-      password_confirmation: data.get('password_confirmation'),
+      password2: data.get('password2'),
     }
-    if (actualData.password && actualData.password_confirmation) {
-      if (actualData.password === actualData.password_confirmation) {
+    if (actualData.password && actualData.password2) {
+      if (actualData.password === actualData.password2) {
         console.log(actualData);
         document.getElementById('password-reset-form').reset()
         setError({ status: true, msg: "Password Reset Successfully. Redirecting to Login Page...", type: 'success' })
@@ -40,7 +40,7 @@ const ResetPassword = () => {
         <h1>Reset Password</h1>
         <Box component='form' noValidate sx={{ mt: 1 }} id='password-reset-form' onSubmit={handleSubmit}>
           <TextField margin='normal' required fullWidth id='password' name='password' label='New Password' type='password' />
-          <TextField margin='normal' required fullWidth id='password_confirmation' name='password_confirmation' label='Confirm New Password' type='password' />
+          <TextField margin='normal' required fullWidth id='password2' name='password2' label='Confirm New Password' type='password' />
           <Box textAlign='center'>
             <Button type='submit' variant='contained' sx={{ mt: 3, mb: 2, px: 5 }}>Save</Button>
           </Box>

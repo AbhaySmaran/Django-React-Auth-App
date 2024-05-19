@@ -10,9 +10,13 @@ const Home = () => {
     const [user,setUser] = useState({
         name: ''
     })
+
+    const [currentPage, setCurrentPage] = useState(1)
+    const [postsPerPage] = useState(10)
+
     const { access_token } = getToken()
     const { data, isSuccess} = useGetLoggedUserQuery(access_token)
-    console.log(data)
+    // console.log(data)
     
     useEffect(()=>{
         if(data && isSuccess){
@@ -31,47 +35,47 @@ const Home = () => {
         fetchData();
     },[])
 
-    const filteredProducts = products.filter(product => 
-        product.title.toLowerCase().includes(searchItem)
-    )
+    // const lastPage = currentPage * postsPerPage
+    // const firstPage = lastPage - postsPerPage
+    // const currentProducts = products.slice(firstPage, lastPage
 
     console.log(products)
     return (
         <div>
             <h1>Home Page</h1>
-            {!user === '' ? <h2>Hello {user.name}</h2> : <h2>You are not logged in</h2>}
+            {data ? <h2>Hello {user.name}</h2> : <h2>You are not logged in</h2>}
             <input  
-                placeholder='Seacrh...'
+                placeholder='Seacrh Product...'
                 type='text'
                 value={searchItem}
                 onChange={(e)=>setSearchItem(e.target.value)}
             />
             {
                 searchItem ? filteredProducts.map(item=>(
-                    <div key={item.id}><Link to={`products/${item.id}`}>{item.title}</Link></div>
+                    <li key={item.id}><Link to={`products/${item.id}`}>{item.title}</Link></li>
                 )) : 
-            <div className='container'>
-                <table className='table'>
-                    <thead>
-                        <tr>
-                            <th scope='col'>id</th>
-                            <th scope='col'>Product Name</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {products.map(product=>(
-                            <tr key={product.id}>
-                                <td>{product.id}</td>
-                                <td>
-                                    <Link to={`products/${product.id}`}>
-                                        {product.title}
-                                    </Link>
-                                </td>
+                <div className='container'>
+                    <table className='table'>
+                        <thead>
+                            <tr>
+                                <th scope='col'>id</th>
+                                <th scope='col'>Product Name</th>
                             </tr>
-                        ))}
-                    </tbody>
-                </table>
-            </div>
+                        </thead>
+                        <tbody>
+                            {products.map(product=>(
+                                <tr key={product.id}>
+                                    <td>{product.id}</td>
+                                    <td>
+                                        <Link to={`products/${product.id}`}>
+                                            {product.title}
+                                        </Link>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
             }
         </div>
 
