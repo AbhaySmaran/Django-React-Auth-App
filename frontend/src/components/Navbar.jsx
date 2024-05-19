@@ -1,10 +1,19 @@
 import React from 'react'
 import { Box, AppBar, Toolbar, Typography, Button } from '@mui/material';
-import { NavLink } from 'react-router-dom';
-import { getToken } from '../services/LocalStorageService'
+import { NavLink,useNavigate } from 'react-router-dom';
+import { getToken,removeToken } from '../services/LocalStorageService'
+import { unSetetUserToken } from '../features/authSlice';
+import { useDispatch } from 'react-redux';
 
 const Navbar = () => {
   const { access_token } = getToken()
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const handleLogout = () =>{
+    dispatch(unSetetUserToken({access_token: null}))
+    removeToken();
+    navigate('/login')
+  }
   return (
     <div>
       <Box sx={{ flexGrow:1 }}>
@@ -16,12 +25,10 @@ const Navbar = () => {
             <Button component={NavLink} to='/' sx={{color: 'white' , backgroundColor: ({ isActive }) => isActive ? '#6d1b7b' : '', textTransform: 'none' }} >Home</Button>
             <Button component={NavLink} to='/contact' sx={{color: 'white', textTransform: 'none' }} >Contact</Button>
             { access_token ? 
-              <Button component={NavLink} to='/dashboard' sx={{color: 'white', textTransform: 'none' }} >Logout</Button>
+              <Button onClick={handleLogout} sx={{color: 'white', textTransform: 'none' }} >Logout</Button>
               :
               <Button component={NavLink} to='/login' sx={{color: 'white', textTransform: 'none' }} >Login/Registration</Button>
             }
-            
-            {/* <Button component={NavLink} to='/login' sx={{color: 'white', textTransform: 'none' }} >Login/Registration</Button> */}
           </Toolbar>
         </AppBar>
       </Box>

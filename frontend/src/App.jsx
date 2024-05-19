@@ -19,12 +19,12 @@ function App() {
         <Routes>
           <Route exact path='/' element={<Layout />}>
             <Route index element={<Home />}/>
-            <Route path='contact' element={<Contact />} />
-            <Route path='login' element={!access_token ? <LoginReg /> : <Navigate to='/dashboard' />} />
+            <Route path='contact' element={!access_token ? <LoginReg /> : <Contact /> } />
+            <Route path='login' element={!access_token ? <LoginReg /> : <Navigate to='/' />} />
             <Route path='passwordresetemail' element={<SendPasswordResetEmail />} />
             <Route path='reset' element={<ResetPassword />} />
             <Route path='products/:id' element={<ProductDetail />} />
-            <Route path='dashboard' element={access_token ? <Dashboard /> : <Navigate to='/login' />} />
+            <Route path='dashboard' element={<Dashboard />} />
             {/* <Route path='products' element={<Products />} /> */}
           </Route>
           
