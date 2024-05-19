@@ -1,5 +1,6 @@
 import React from 'react'
 import { useState,useEffect } from 'react'
+import { Link } from 'react-router-dom'
 
 const Home = () => {
     const [products, setProducts] = useState([])
@@ -15,11 +16,11 @@ const Home = () => {
     console.log(products)
     return (
         <div>
-            Home Page
+            <h1>Home Page</h1>
             <ul>
                 {products.map(product=>(
                     <li key={product.id}>
-                        {product.id}--{product.title}
+                        <Link to={`/products/${product.id}`} >{product.id}--{product.title}</Link>
                     </li>
                 ))}
             </ul>
