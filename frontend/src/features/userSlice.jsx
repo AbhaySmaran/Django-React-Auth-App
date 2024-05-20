@@ -13,7 +13,7 @@ export const userSlice = createSlice({
         state.email = action.payload.email
         state.name = action.payload.name
     },
-    unSetUserToken: (state, action) => {
+    unSetUserInfo: (state, action) => {
         state.email = action.payload.email
         state.name = action.payload.name
     },

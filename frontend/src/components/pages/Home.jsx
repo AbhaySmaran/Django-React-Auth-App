@@ -7,9 +7,9 @@ import { getToken } from '../../services/LocalStorageService'
 const Home = () => {
     const [products, setProducts] = useState([])
     const [searchItem, setSearchItem] = useState('')
-    const [user,setUser] = useState({
-        name: ''
-    })
+    // const [user,setUser] = useState({
+    //     name: ''
+    // })
 
     const [currentPage, setCurrentPage] = useState(1)
     const [postsPerPage] = useState(10)
@@ -18,13 +18,13 @@ const Home = () => {
     const { data, isSuccess} = useGetLoggedUserQuery(access_token)
     // console.log(data)
     
-    useEffect(()=>{
-        if(data && isSuccess){
-            setUser({
-                name: data.name
-            })
-        }
-    },[data, isSuccess])
+    // useEffect(()=>{
+    //     if(data && isSuccess){
+    //         setUser({
+    //             name: data.name
+    //         })
+    //     }
+    // },[data, isSuccess])
 
     useEffect(()=>{
         const fetchData = async()=>{
@@ -43,7 +43,7 @@ const Home = () => {
     return (
         <div>
             <h1>Home Page</h1>
-            {data ? <h2>Hello {user.name}</h2> : <h2>You are not logged in</h2>}
+            {isSuccess ? <h2>Hello {data.name}</h2> : <h2>You are not logged in</h2>}
             <input  
                 placeholder='Seacrh Product...'
                 type='text'

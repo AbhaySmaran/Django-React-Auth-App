@@ -2,6 +2,7 @@ import { Box, TextField, Button, Alert } from '@mui/material';
 import { useState,useEffect } from 'react';
 import { getToken } from '../../../services/LocalStorageService';
 import { useChangeUserPasswordMutation } from '../../../services/userAuthApi';
+import { useSelector } from 'react-redux';
 
 const ChangePassword = () => {
   const [server_erroe, setServerError] = useState({});
@@ -18,6 +19,7 @@ const ChangePassword = () => {
       password2: data.get('password2'),
     }
     const res = await changeUserPassword({actualData, access_token});
+    
     console.log(res.data)
     // if(res.error){
     //   setErrorMsg({})

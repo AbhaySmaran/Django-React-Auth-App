@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { setUserToken } from '../../../features/authSlice';
+import { setUserInfo } from '../../../features/userSlice';
 import { getToken, storeToken } from '../../../services/LocalStorageService'
 import { useLoginUserMutation } from '../../../services/userAuthApi';
 
@@ -13,7 +14,7 @@ const UserLogin = () => {
   const dispatch = useDispatch()
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const data = new FormData(e.currentTarget);
+    const data = new FormData(e.currentTarget)
     const actualData = {
       email: data.get('email'),
       password: data.get('password'),

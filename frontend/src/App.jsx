@@ -13,6 +13,7 @@ import Products from './components/functions/Products';
 
 function App() {
   const { access_token } = useSelector(state=> state.auth)
+  const { email, name } = useSelector(state=> state.user)
   return (
     <>
       <Router>

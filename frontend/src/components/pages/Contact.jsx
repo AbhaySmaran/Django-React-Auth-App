@@ -3,11 +3,13 @@ import { useState,useEffect } from 'react'
 import { useGetLoggedUserQuery } from '../../services/userAuthApi'
 import { useDispatch } from 'react-redux'
 import { setUserInfo } from '../../features/userSlice'
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux'
  
 const Contact = () => {
   const { access_token } = getToken()
   const { data, isSuccess } = useGetLoggedUserQuery(access_token)
+
   const [userData, setUserData] = useState({
     name: '',
     email: ''
@@ -24,14 +26,14 @@ const Contact = () => {
     }
   },[data, isSuccess])
 
-  useEffect(()=>{
-    if(data, isSuccess){
-      dispatch(setUserInfo({
-        name: data.name,
-        email: data.name
-      }))
-    }
-  }, [data, isSuccess, dispatch])
+  // useEffect(()=>{
+  //   if(data, isSuccess){
+  //     dispatch(setUserInfo({
+  //       name: data.name,
+  //       email: data.name 
+  //     }))
+  //   }
+  // }, [data, isSuccess, dispatch])
 
   return (
     <div>
