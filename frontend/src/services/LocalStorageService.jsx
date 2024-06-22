@@ -1,5 +1,3 @@
-import SendPasswordResetEmail from "../components/pages/auth/SendPasswordResetEmail"
-
 const storeToken = (value) => {
     if (value) {
       // console.log("Store Token")
@@ -20,5 +18,17 @@ const removeToken = () => {
   localStorage.removeItem('refresh_token')
 }
   
+// const getUser = (name,email) => {
+//   if(name && email){
+//     localStorage.setItem('name',name)
+//     localStorage.setItem('email',email)
+//   }
+// }
 
-export { storeToken, getToken, removeToken }
+const removeUser = () => {
+  localStorage.removeItem('name')
+  localStorage.removeItem('email')
+}
+
+
+export { storeToken, getToken, removeToken, removeUser }

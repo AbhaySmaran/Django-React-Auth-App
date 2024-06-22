@@ -1,69 +1,62 @@
-import React from 'react'
-import { useState,useEffect } from 'react'
-import { Link } from 'react-router-dom'
-import { useGetLoggedUserQuery } from '../../services/userAuthApi'
-import { getToken } from '../../services/LocalStorageService'
+import React, { useState, useEffect } from 'react';
+import { Link, useSearchParams } from 'react-router-dom';
+import { useGetLoggedUserQuery } from '../../services/userAuthApi';
+import { getToken } from '../../services/LocalStorageService';
 
 const Home = () => {
-    const [products, setProducts] = useState([])
-    const [searchItem, setSearchItem] = useState('')
-    // const [user,setUser] = useState({
-    //     name: ''
-    // })
+    const [products, setProducts] = useState([]);
+    const [searchParams, setSearchParams] = useSearchParams();
+    const searchItem = searchParams.get('search') || '';
 
-    const [currentPage, setCurrentPage] = useState(1)
-    const [postsPerPage] = useState(10)
+    const { access_token } = getToken();
+    const { data, isSuccess } = useGetLoggedUserQuery(access_token);
 
-    const { access_token } = getToken()
-    const { data, isSuccess} = useGetLoggedUserQuery(access_token)
-    // console.log(data)
-    
-    // useEffect(()=>{
-    //     if(data && isSuccess){
-    //         setUser({
-    //             name: data.name
-    //         })
-    //     }
-    // },[data, isSuccess])
-
-    useEffect(()=>{
-        const fetchData = async()=>{
+    useEffect(() => {
+        const fetchData = async () => {
             await fetch('https://dummyjson.com/products')
-                .then(res=> res.json())
-                .then(res=>setProducts(res.products))          
+                .then(res => res.json())
+                .then(res => setProducts(res.products));
         };
         fetchData();
-    },[])
+    }, []);
 
-    // const lastPage = currentPage * postsPerPage
-    // const firstPage = lastPage - postsPerPage
-    // const currentProducts = products.slice(firstPage, lastPage
+    const filteredProducts = products.filter(product =>
+        product.title.toLowerCase().includes(searchItem.toLowerCase())
+    );
 
-    console.log(products)
+    const handleSearch = () => {
+        setSearchParams({ search: searchItem });
+    };
+
     return (
         <div>
             <h1>Home Page</h1>
             {isSuccess ? <h2>Hello {data.name}</h2> : <h2>You are not logged in</h2>}
-            <input  
-                placeholder='Seacrh Product...'
-                type='text'
+            <label htmlFor="search">Search Product:</label>
+            <input
+                id="search"
+                placeholder="Search Product..."
+                type="text"
                 value={searchItem}
-                onChange={(e)=>setSearchItem(e.target.value)}
+                onChange={(e) => setSearchParams({ search: e.target.value })}
             />
+            <button onClick={handleSearch}>Search</button>
             {
-                searchItem ? filteredProducts.map(item=>(
-                    <li key={item.id}><Link to={`products/${item.id}`}>{item.title}</Link></li>
-                )) : 
-                <div className='container'>
-                    <table className='table'>
+                searchItem ? filteredProducts.map(item => (
+                    <li key={item.id}>
+                        <Link to={`products/${item.id}`}>{item.title}</Link>
+                    </li>
+                )) :
+                <div className="container">
+                    <table className="table">
                         <thead>
                             <tr>
-                                <th scope='col'>id</th>
-                                <th scope='col'>Product Name</th>
+                                <th scope="col">ID</th>
+                                <th scope="col">Product Name</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {products.map(product=>(
+                            {products.map(product => (
                                 <tr key={product.id}>
                                     <td>{product.id}</td>
                                     <td>
@@ -78,8 +71,7 @@ const Home = () => {
                 </div>
             }
         </div>
-
-    )
+    );
 }
 
-export default Home
+export default Home;
