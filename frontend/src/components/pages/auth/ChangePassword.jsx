@@ -1,36 +1,29 @@
 import { Box, TextField, Button, Alert } from '@mui/material';
 import { useState,useEffect } from 'react';
 import { getToken } from '../../../services/LocalStorageService';
-import { useChangeUserPasswordMutation } from '../../../services/userAuthApi';
+import { useChangeUserPasswordMutation,useGetLoggedUserQuery } from '../../../services/userAuthApi';
 import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { setUserToken } from '../../../features/authSlice';
 
 const ChangePassword = () => {
   const [server_erroe, setServerError] = useState({});
   const [server_msg,setServerMsg] = useState({});
-
-  const [changeUserPassword] = useChangeUserPasswordMutation()
+  const dispatch = useDispatch()
   const { access_token } = getToken()
-
-  const handleSubmit = async(event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
+  console.log(access_token)
+  const {data, isSuccess} = useGetLoggedUserQuery(access_token)
+  const [changeUserPassword, {isLoading}] = useChangeUserPasswordMutation()
+  
+  const handleSubmit = async(e) => {
+    e.preventDefault();
+    const userdata = new FormData(e.currentTarget)
     const actualData = {
-      password: data.get('password'),
-      password2: data.get('password2'),
+      password: userdata.get('password'),
+      password2: userdata.get('password2')
     }
-    const res = await changeUserPassword({actualData, access_token});
-    
-    console.log(res.data)
-    // if(res.error){
-    //   setErrorMsg({})
-    //   setServerError(res.error.data.errors) 
-    // }
-    // if(res.data){
-    //   console.log(res.data)
-    //   setServerError({})
-    //   setServerMsg(res.data)
-    // }
-
+    const res = await changeUserPassword({actualData, access_token})
+    console.log(res)
   }
   return (
     <>

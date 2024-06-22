@@ -1,7 +1,7 @@
 import React from 'react'
 import { Box, AppBar, Toolbar, Typography, Button } from '@mui/material';
 import { NavLink,useNavigate } from 'react-router-dom';
-import { getToken,removeToken } from '../services/LocalStorageService'
+import { getToken,removeToken,removeUser } from '../services/LocalStorageService'
 import { unSetUserToken } from '../features/authSlice';
 import { useDispatch } from 'react-redux';
 
@@ -12,6 +12,7 @@ const Navbar = () => {
   const handleLogout = () =>{
     dispatch(unSetUserToken({access_token: null}))
     removeToken();
+    removeUser();
     navigate('/login')
   }
   return (
@@ -24,6 +25,7 @@ const Navbar = () => {
             </Typography>
             <Button component={NavLink} to='/' sx={{color: 'white' , backgroundColor: ({ isActive }) => isActive ? '#6d1b7b' : '', textTransform: 'none' }} >Home</Button>
             <Button component={NavLink} to='/contact' sx={{color: 'white', textTransform: 'none' }} >Profile</Button>
+            <Button></Button>
             { access_token ? 
               <Button onClick={handleLogout} sx={{color: 'white', textTransform: 'none' }} >Logout</Button>
               :

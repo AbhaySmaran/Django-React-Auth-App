@@ -7,44 +7,64 @@ import { getToken } from '../../services/LocalStorageService';
 import { useGetLoggedUserQuery } from '../../services/userAuthApi';
 import { setUserInfo } from '../../features/userSlice';
 
-// import { useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 const Dashboard = () => {
-  const [userData,setUserData] = useState({
-    name: '',
-    email: ''
-  })
-  const dispatch = useDispatch()
-  const { access_token } = getToken()
-  const {data, isSuccess} = useGetLoggedUserQuery(access_token)  
+  // const [userData,setUserData] = useState({
+  //   name: '',
+  //   email: ''
+  // })
+  // const name = useSelector((state) => state.user.name)
+  // const email = useSelector((state)=> state.user.email)
 
-  useEffect(()=>{
-    if(data && isSuccess){
-      setUserData({
-        name: data.name,
-        email: data.email
-      }) 
-    }
-  },[data,isSuccess])
+  // const dispatch = useDispatch()
+  // useEffect(()=>{
+  //   if(name,email){
+  //     dispatch(setUserInfo({
+  //       name: name,
+  //       email: email 
+  //     }))
+  //   }
+  // }, [name,email, dispatch])
 
-  useEffect(()=>{
-    if(data && isSuccess){
-      dispatch(setUserData({
-        name: data.name,
-        email: data.email
-      }))
-    }
-  },[data,isSuccess,dispatch])
+  
 
-  console.log(data)
+  // if(name,email){
+  //   localStorage.setItem('email', email)
+  //   localStorage.setItem('name',name)
+  // }
+
+
+  // const { access_token } = getToken()
+  // const {data, isSuccess} = useGetLoggedUserQuery(access_token)  
+
+  // useEffect(()=>{
+  //   if(data && isSuccess){
+  //     setUserData({
+  //       name: data.name,
+  //       email: data.email
+  //     }) 
+  //   }
+  // },[data,isSuccess])
+
+  // useEffect(()=>{
+  //   if(data && isSuccess){
+  //     dispatch(setUserData({
+  //       name: data.name,
+  //       email: data.email
+  //     }))
+  //   }
+  // },[data,isSuccess,dispatch])
+
+  // console.log(data)
 
   return <>
     <CssBaseline />
     <Grid container>
       <Grid item sm={4} sx={{ backgroundColor: 'gray', p: 5, color: 'white' }}>
         <h1>Dashboard</h1>
-        <Typography variant='h5'>Email: {data.email}</Typography>
-        <Typography variant='h6'>Name: {data.name}</Typography>
+        <Typography variant='h5'>Email: {localStorage.getItem('email')}</Typography>
+        <Typography variant='h6'>Name: {localStorage.getItem('name')}</Typography> 
       </Grid>
       <Grid item sm={8}>
         <ChangePassword />
