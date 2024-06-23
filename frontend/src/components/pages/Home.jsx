@@ -41,10 +41,10 @@ const Home = () => {
     const renderedProducts = products.map(product => {
         return (
             <div className='col-md-3' style={{ marginBottom: '10px' }} key={product.id}>
-                <Card  className='h-100'>
+                <Link to={`products/${product.id}`}><Card  className='h-100'>
                     <div className='text-center'>
-                        <Card.Img variant="top" src={product.thumbnail} style={{ width: '100px', height: '130px' }} />
-                        <Card.Body as={Link} to={`products/${product.id}`}>
+                        <Card.Img variant="top" src={product.thumbnail} style={{ width: '100px', height: '130px' }}/>
+                        <Card.Body >
                             <Card.Title>{product.title}</Card.Title>
                             <Card.Text>Price: ${product.price}</Card.Text>
                         </Card.Body>
@@ -55,6 +55,7 @@ const Home = () => {
                         </Card.Footer>
                     </div>
                 </Card>
+                </Link>
             </div>)
     })
 
