@@ -10,6 +10,8 @@ import Dashboard from './components/pages/Dashboard';
 import ProductDetail from './components/functions/product-details';
 import { useSelector } from 'react-redux';
 import Products from './components/functions/Products';
+import Cart from './components/pages/Cart';
+import PageNotFound from './components/pages/PageNotFound';
 
 function App() {
   const { access_token } = useSelector(state=> state.auth)
@@ -26,8 +28,10 @@ function App() {
             <Route path='reset' element={<ResetPassword />} />
             <Route path='products/:id' element={<ProductDetail />} />
             <Route path='dashboard' element={<Dashboard />} />
+            <Route path='cart' element={<Cart />}/>
           </Route>
           <Route path='/products' element={<Products />} />
+          <Route path='*' element={<PageNotFound />} />
         </Routes>
       </Router>
     </>

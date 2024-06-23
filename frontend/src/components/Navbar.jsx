@@ -4,8 +4,10 @@ import { NavLink,useNavigate } from 'react-router-dom';
 import { getToken,removeToken,removeUser } from '../services/LocalStorageService'
 import { unSetUserToken } from '../features/authSlice';
 import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 const Navbar = () => {
+  const cart = useSelector(state => state.cart)
   const { access_token } = getToken()
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -25,7 +27,7 @@ const Navbar = () => {
             </Typography>
             <Button component={NavLink} to='/' sx={{color: 'white' , backgroundColor: ({ isActive }) => isActive ? '#6d1b7b' : '', textTransform: 'none' }} >Home</Button>
             <Button component={NavLink} to='/contact' sx={{color: 'white', textTransform: 'none' }} >Profile</Button>
-            <Button></Button>
+            <Button component={NavLink} to='/cart' sx={{color: 'white', textTransform: 'none' }}>Cart({cart.length})</Button>
             { access_token ? 
               <Button onClick={handleLogout} sx={{color: 'white', textTransform: 'none' }} >Logout</Button>
               :
