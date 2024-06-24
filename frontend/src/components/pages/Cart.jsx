@@ -10,14 +10,20 @@ const Cart = () => {
         dispatch(remove(id))
     }
     
+    const getTotalPrice = () => {
+        return cartProducts.reduce((total, product) => total + product.price, 0);
+    };
+
     return (
         <div>
+            <h3>Total Price:  ${getTotalPrice().toFixed(2)}</h3>
+
             {cartProducts.map(product => {
                 return (
                     <div key={product.id}>
                             <Card className='col-md-3' style={{ marginBottom: '10px' }}>
                                 <div className="h-100">
-                                    <Card.Img src={product.thumbnail} alt={product.title}/>
+                                    <Card.Img src={`http://localhost:8000${product.image}`} alt={product.title}/> 
                                     <Card.Body as={Link} to={`/products/${product.id}`}>
                                         <Card.Title>{product.title}</Card.Title>
                                         <Card.Text>Price: ${product.price}</Card.Text>

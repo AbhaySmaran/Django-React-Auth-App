@@ -6,6 +6,7 @@ import { Card, Button, Container, Row, Col, Form } from 'react-bootstrap';
 import { useSelector,useDispatch } from 'react-redux';
 // import { addListener } from '@reduxjs/toolkit';
 import { addtoCart } from '../../features/cartSllice';
+import axios from 'axios';
 
 const Home = () => {
     const [products, setProducts] = useState([]);
@@ -23,9 +24,9 @@ const Home = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            await fetch('https://dummyjson.com/products')
+            await fetch('http://127.0.0.1:8000/products/')
                 .then(res => res.json())
-                .then(res => setProducts(res.products));
+                .then(result => setProducts(result));
         };
         fetchData();
     }, []);
@@ -41,9 +42,9 @@ const Home = () => {
     const renderedProducts = products.map(product => {
         return (
             <div className='col-md-3' style={{ marginBottom: '10px' }} key={product.id}>
-                <Link to={`products/${product.id}`}><Card  className='h-100'>
+                <Card  className='h-100'>
                     <div className='text-center'>
-                        <Card.Img variant="top" src={product.thumbnail} style={{ width: '100px', height: '130px' }}/>
+                    <Link to={`products/${product.id}`}><Card.Img variant="top" src={`http://127.0.0.1:8000${product.image}`} style={{ width: '100px', height: '130px' }}/></Link>
                         <Card.Body >
                             <Card.Title>{product.title}</Card.Title>
                             <Card.Text>Price: ${product.price}</Card.Text>
@@ -55,7 +56,6 @@ const Home = () => {
                         </Card.Footer>
                     </div>
                 </Card>
-                </Link>
             </div>)
     })
 

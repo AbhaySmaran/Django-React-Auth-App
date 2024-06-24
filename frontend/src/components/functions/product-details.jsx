@@ -6,7 +6,7 @@ const ProductDetail = () => {
     const [product, setProduct] = useState(null);
 
     useEffect(() => {
-        fetch(`https://dummyjson.com/products/${id}`)
+        fetch(`http://127.0.0.1:8000/products/${id}`)
             .then((response) => response.json())
             .then((data) => setProduct(data));
     }, [id]);
@@ -16,10 +16,13 @@ const ProductDetail = () => {
             <h2>Product Detail Page</h2>
             {product ? (
                 <div>
-                    <img src={product.thumbnail} alt="Product" />
+                    <img src={`http://127.0.0.1:8000${product.image}`} alt="Product" style={{heigth: '100px'}}/>
                     <h3>{product.title}</h3>
                     <h3>$ {product.price}</h3>
                     <p>{product.description}</p>
+                    <i>Rating: {product.rating}</i>
+                    <br />
+                    <i>Availibility: {product.stock} in stocks now.</i>
                 </div>
             ) : (
                 // this is not the right way to do loading, create a separate state for this

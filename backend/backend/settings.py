@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'accounts',
     'rest_framework',
     'corsheaders',
-    'rest_framework_simplejwt'
+    'rest_framework_simplejwt',
+    'products',
 ]
 
 REST_FRAMEWORK = {
@@ -170,3 +171,6 @@ EMAIL_USE_TLC = True
 CORS_ORIGIN_ALLOW_ALL = True
 
 PASSWORD_RESET_TIMEOUT = 900
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')

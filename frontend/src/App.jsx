@@ -28,7 +28,7 @@ function App() {
             <Route path='reset' element={<ResetPassword />} />
             <Route path='products/:id' element={<ProductDetail />} />
             <Route path='dashboard' element={<Dashboard />} />
-            <Route path='cart' element={<Cart />}/>
+            <Route path='cart' element={!access_token ? <LoginReg/> : <Cart />}/>
           </Route>
           <Route path='/products' element={<Products />} />
           <Route path='*' element={<PageNotFound />} />
