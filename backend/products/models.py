@@ -14,4 +14,4 @@ class Products(models.Model):
     availabilityStatus = models.CharField(max_length=100, blank=True)
 
 
-# class Cart(models.Model):
+
