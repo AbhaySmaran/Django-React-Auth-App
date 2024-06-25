@@ -1,12 +1,12 @@
+// Home.js
 import React, { useState, useEffect } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { useGetLoggedUserQuery } from '../../services/userAuthApi';
 import { getToken } from '../../services/LocalStorageService';
-import { Card, Button, Container, Row, Col, Form } from 'react-bootstrap';
-import { useSelector,useDispatch } from 'react-redux';
-// import { addListener } from '@reduxjs/toolkit';
+import { useSelector, useDispatch } from 'react-redux';
 import { addtoCart } from '../../features/cartSllice';
-import axios from 'axios';
+import Filters from '../functions/Filters';
+import { Container, Grid, Card, CardContent, CardMedia, CardActions, Typography, Button, TextField, Box } from '@mui/material';
 
 const Home = () => {
     const [products, setProducts] = useState([]);
@@ -16,22 +16,22 @@ const Home = () => {
     const { access_token } = getToken();
     const { data, isSuccess } = useGetLoggedUserQuery(access_token);
 
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
 
-    const addToCart = (product)=>{
-        dispatch(addtoCart(product))
-    }
+    const addToCart = (product) => {
+        dispatch(addtoCart(product));
+    };
 
     useEffect(() => {
         const fetchData = async () => {
             await fetch('http://127.0.0.1:8000/products/')
-                .then(res => res.json())
-                .then(result => setProducts(result));
+                .then((res) => res.json())
+                .then((result) => setProducts(result));
         };
         fetchData();
     }, []);
 
-    const filteredProducts = products.filter(product =>
+    const filteredProducts = products.filter((product) =>
         product.title.toLowerCase().includes(searchItem.toLowerCase())
     );
 
@@ -39,73 +39,64 @@ const Home = () => {
         setSearchParams({ search: searchItem });
     };
 
-    const renderedProducts = products.map(product => {
-        return (
-            <div className='col-md-3' style={{ marginBottom: '10px' }} key={product.id}>
-                <Card  className='h-100'>
-                    <div className='text-center'>
-                    <Link to={`products/${product.id}`}><Card.Img variant="top" src={`http://127.0.0.1:8000${product.image}`} style={{ width: '100px', height: '130px' }}/></Link>
-                        <Card.Body >
-                            <Card.Title>{product.title}</Card.Title>
-                            <Card.Text>Price: ${product.price}</Card.Text>
-                        </Card.Body>
-                        <Card.Footer >
-                            <Button variant="primary" onClick={()=>addToCart(product)}>
-                                Add To Cart
-                            </Button>
-                        </Card.Footer>
-                    </div>
-                </Card>
-            </div>)
-    })
+    const handleFilterChange = (e, type) => {
+        // Handle filter change logic here based on type
+        console.log(type, e ? e.target.checked : null);
+    };
+
+    const renderedProducts = filteredProducts.map((product) => (
+        <Grid item xs={12} sm={6} md={4} lg={3} key={product.id}>
+            <Card>
+                <CardMedia
+                    component="img"
+                    height="140"
+                    image={`http://127.0.0.1:8000${product.image}`}
+                    alt={product.title}
+                />
+                <CardContent>
+                    <Typography gutterBottom variant="h5" component="div">
+                        {product.title}
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                        Price: ${product.price}
+                    </Typography>
+                </CardContent>
+                <CardActions>
+                    <Button size="small" color="primary" onClick={() => addToCart(product)}>
+                        Add To Cart
+                    </Button>
+                </CardActions>
+            </Card>
+        </Grid>
+    ));
 
     return (
-        <div>
-            <h1>Home Page</h1>
-            {isSuccess ? <h2>Hello {data.name}</h2> : <h2>You are not logged in</h2>}
-            <label htmlFor="search">Search Product:</label>
-            <input
-                id="search"
-                placeholder="Search Product..."
-                type="text"
-                value={searchItem}
-                onChange={(e) => setSearchParams({ search: e.target.value })}
-            />
-            <button onClick={handleSearch}>Search</button>
-            {
-                searchItem ? filteredProducts.map(item => (
-                    <li key={item.id}>
-                        <Link to={`products/${item.id}`}>{item.title}</Link>
-                    </li>
-                )) :
-                <div className='row'>
+        <Container sx={{ display: 'flex', marginTop: 4 }}>
+            <Box sx={{ width: '20%', marginRight: 2 }}>
+                <Filters handleFilterChange={handleFilterChange} />
+            </Box>
+            <Box sx={{ width: '80%' }}>
+                <Typography variant="h4" gutterBottom>
+                    Home Page
+                </Typography>
+                {isSuccess ? <Typography variant="h6">Hello {data.name}</Typography> : <Typography variant="h6">You are not logged in</Typography>}
+                <TextField
+                    label="Search Product"
+                    variant="outlined"
+                    fullWidth
+                    margin="normal"
+                    value={searchItem}
+                    onChange={(e) => setSearchParams({ search: e.target.value })}
+                />
+                <Button variant="contained" color="primary" onClick={handleSearch}>
+                    Search
+                </Button>
+                <Grid container spacing={2} sx={{ marginTop: 2 }}>
                     {renderedProducts}
-                </div>
-                // <div className="container">
-                //     <table className="table">
-                //         <thead>
-                //             <tr>
-                //                 <th scope="col">ID</th>
-                //                 <th scope="col">Product Name</th>
-                //             </tr>
-                //         </thead>
-                //         <tbody>
-                //             {products.map(product => (
-                //                 <tr key={product.id}>
-                //                     <td>{product.id}</td>
-                //                     <td>
-                //                         <Link to={`products/${product.id}`}>
-                //                             {product.title}
-                //                         </Link>
-                //                     </td>
-                //                 </tr>
-                //             ))}
-                //         </tbody>
-                //     </table>
-                // </div>
-            }
-        </div>
-    )
-}
+                </Grid>
+            </Box>
+        </Container>
+    );
+};
 
 export default Home;
