@@ -6,7 +6,7 @@ const Filters = ({ handleFilterChange }) => {
     const [rate, setRate] = useState(3);
 
     return (
-        <Box sx={{ padding: 2 }}>
+        <Box sx={{ padding: 2, position: 'fixed' }}>
             <Typography variant="h6" gutterBottom>
                 Filter Products
             </Typography>
@@ -17,6 +17,7 @@ const Filters = ({ handleFilterChange }) => {
                     <FormControlLabel value="descending" control={<Radio />} label="Descending" />
                 </RadioGroup>
             </FormControl>
+            <br/>
             <FormControlLabel
                 control={<Checkbox onChange={(e) => handleFilterChange(e, 'outOfStock')} />}
                 label="Out of Stock"
