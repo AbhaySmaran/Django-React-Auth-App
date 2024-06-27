@@ -47,12 +47,12 @@ const Home = () => {
     const renderedProducts = filteredProducts.map((product) => (
         <Grid item xs={12} sm={6} md={4} lg={3} key={product.id}>
             <Card>
-                <CardMedia
+                <Link to={`products/${product.id}`}><CardMedia
                     component="img"
                     height="140"
                     image={`http://127.0.0.1:8000${product.image}`}
                     alt={product.title}
-                />
+                /></Link>
                 <CardContent>
                     <Typography gutterBottom variant="h5" component="div">
                         {product.title}
@@ -64,6 +64,9 @@ const Home = () => {
                 <CardActions>
                     <Button size="small" color="primary" onClick={() => addToCart(product)}>
                         Add To Cart
+                    </Button>
+                    <Button size="small" color="primary" >
+                        Order Now
                     </Button>
                 </CardActions>
             </Card>

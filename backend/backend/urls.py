@@ -19,12 +19,14 @@ from django.urls import path,include
 from django.conf import settings
 from django.conf.urls.static import static
 from products.views import *
+from orders.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/user/',include('accounts.urls')),
     path('products/',ProductView),
     path('products/<int:id>/',ProductDetail),
+    path('orders/api/', OrdersView.as_view())
 ]
 
 if settings.DEBUG:

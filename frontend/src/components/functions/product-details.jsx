@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { Button } from "react-bootstrap";
+import { addtoCart } from "../../features/cartSllice";
+import { useDispatch } from "react-redux";
 
 const ProductDetail = () => {
     const { id } = useParams();
@@ -23,6 +26,8 @@ const ProductDetail = () => {
                     <i>Rating: {product.rating}</i>
                     <br />
                     <i>Availibility: {product.stock} in stocks now.</i>
+                    <Button>Add To Cart</Button>
+                    <Button>Order Now</Button>
                 </div>
             ) : (
                 // this is not the right way to do loading, create a separate state for this
