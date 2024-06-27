@@ -20,7 +20,7 @@ const Navbar = () => {
   return (
     <div>
       <Box sx={{ flexGrow:1 }}>
-        <AppBar position='static' color='secondary'>
+        <AppBar position='fixed' color='secondary'>
           <Toolbar>
             <Typography variant='h5' component='div' sx={{ flexGrow:1 }}>
               Auth-App

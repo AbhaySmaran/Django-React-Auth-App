@@ -7,7 +7,7 @@ import Breadcrumbs from '../functions/breadcrumbs';
 const Layout = () => {
   return (
     <div>
-      <CssBaseline />
+      {/* <CssBaseline /> */}
       <Navbar />
       <Breadcrumbs />
       <Outlet />

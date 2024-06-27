@@ -74,7 +74,7 @@ const Home = () => {
     ));
 
     return (
-        <Container sx={{ display: 'flex', marginTop: 4 }}>
+        <Container sx={{ display: 'flex', marginTop: 8 }}>
             <Box sx={{ width: '20%', marginRight: 2 }}>
                 <Filters handleFilterChange={handleFilterChange} />
             </Box>

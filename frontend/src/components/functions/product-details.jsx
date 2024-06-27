@@ -26,6 +26,7 @@ const ProductDetail = () => {
                     <i>Rating: {product.rating}</i>
                     <br />
                     <i>Availibility: {product.stock} in stocks now.</i>
+                    <br />
                     <Button>Add To Cart</Button>
                     <Button>Order Now</Button>
                 </div>
