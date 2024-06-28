@@ -17,10 +17,10 @@ const ChangePassword = () => {
   
   const handleSubmit = async(e) => {
     e.preventDefault();
-    const userdata = new FormData(e.currentTarget)
+    const data = new FormData(e.currentTarget)
     const actualData = {
-      password: userdata.get('password'),
-      password2: userdata.get('password2')
+      password: data.get('password'),
+      password2: data.get('password2')
     }
     const res = await changeUserPassword({actualData, access_token})
     console.log(res)
