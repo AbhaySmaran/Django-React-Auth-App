@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams,useNavigate } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import { addtoCart } from "../../features/cartSllice";
 import { useDispatch } from "react-redux";
@@ -12,6 +12,7 @@ const ProductDetail = () => {
     const [product, setProduct] = useState(null);
     const { access_token } = getToken()
     const { data, isSuccess } = useGetLoggedUserQuery(access_token)
+    const navigate = useNavigate()
 
     console.log(access_token)
     useEffect(() => {
@@ -38,6 +39,7 @@ const ProductDetail = () => {
                     'Authorization': `Bearer ${access_token}`
                 }
             });
+            navigate(-1)
             console.log(res.data)
         }catch(err){
             console.error('Problem Placing Order', err)

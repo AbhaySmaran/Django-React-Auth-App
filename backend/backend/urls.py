@@ -20,6 +20,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from products.views import *
 from orders.views import *
+from cart.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -27,7 +28,8 @@ urlpatterns = [
     path('products/',ProductView),
     path('products/<int:id>/',ProductDetail),
     path('orders/api/', OrdersView.as_view()),
-    path('orders/api/<int:pk>/', OrdersView.as_view())
+    path('orders/api/<int:pk>/', OrdersView.as_view()),
+    path('api/cart/',CartView.as_view()),
 ]
 
 if settings.DEBUG:
