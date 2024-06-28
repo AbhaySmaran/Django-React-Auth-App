@@ -6,10 +6,23 @@ import { setUserInfo } from '../../features/userSlice'
 import { setUserToken } from '../../features/authSlice'
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
+import axios from 'axios'
  
 const Contact = () => {
   const { access_token } = getToken()
   const { data, isSuccess } = useGetLoggedUserQuery(access_token)
+  const [myorders,setMyorders] = useState([])
+
+  useEffect(()=>{
+    const fetchOrders = async() =>{
+      const res = await axios.get('http://127.0.0.1:8000/orders/api/')
+      setMyorders(res.data)
+    };
+    fetchOrders();
+  },[])
+
+  console.log(myorders)
+
 
   // const [userData, setUserData] = useState({
   //   name: '',
@@ -53,6 +66,24 @@ const Contact = () => {
       <h3>Name:- {userName}</h3>
       <h4>Email: {userEmail}</h4>
       <Link to='/dashboard'><h5>Change Password</h5></Link>
+      <table clssName='table'>
+        <thead>
+          <tr>
+            <th>Product Name</th>
+            <th>Product Price</th>
+            <th>Order Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          {myorders.map((item)=>(
+            <tr>
+              <td>{item.product_name}</td>
+              <td>${item.product_price}</td>
+              <td>{item.order_date}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   )
 }

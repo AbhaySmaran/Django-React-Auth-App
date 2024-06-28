@@ -35,7 +35,7 @@ export const userAuthApi = createApi({
                 url: 'profile/',
                 method: 'GET',
                 headers: {
-                    'authorization': `Bearer ${access_token}`
+                    'Authorization': `Bearer ${access_token}`
                 }
             }
         }
@@ -46,8 +46,7 @@ export const userAuthApi = createApi({
                 url: 'changepassword/',
                 method: 'POST',
                 body: actualData,
-                headers: {
-                    
+                headers: {                   
                     'Authorization': `Bearer ${access_token}`
                 }
             }

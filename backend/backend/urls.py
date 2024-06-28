@@ -26,7 +26,8 @@ urlpatterns = [
     path('api/user/',include('accounts.urls')),
     path('products/',ProductView),
     path('products/<int:id>/',ProductDetail),
-    path('orders/api/', OrdersView.as_view())
+    path('orders/api/', OrdersView.as_view()),
+    path('orders/api/<int:pk>/', OrdersView.as_view())
 ]
 
 if settings.DEBUG:

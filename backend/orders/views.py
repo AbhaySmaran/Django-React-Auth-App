@@ -8,8 +8,12 @@ from rest_framework.permissions import IsAuthenticated
 
 # Create your views here.
 class OrdersView(APIView):
-    permission_classes = [IsAuthenticated]
-    def get(self, request, format=None):
+    # permission_classes = [IsAuthenticated]
+    def get(self, request,pk=None, format=None):
+        if pk is not None:
+            order = Orders.objects.get(pk=pk)
+            serializer = OrderSerializer(order)
+            return Response(serializer.data)
         orders = Orders.objects.all()
         serializer = OrderSerializer(orders, many=True)
         return Response(serializer.data)
