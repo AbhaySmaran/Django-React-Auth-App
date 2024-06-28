@@ -10,3 +10,5 @@ class Orders(models.Model):
     product_name = models.CharField(max_length=50, blank=True)
     product_price = models.IntegerField(null=True,blank=True)
     order_date = models.DateField(auto_now_add=True)
+
+    # def get_order_by_user()
