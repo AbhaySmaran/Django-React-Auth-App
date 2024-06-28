@@ -7,6 +7,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { addtoCart } from '../../features/cartSllice';
 import Filters from '../functions/Filters';
 import { Container, Grid, Card, CardContent, CardMedia, CardActions, Typography, Button, TextField, Box } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
     const [products, setProducts] = useState([]);
@@ -15,8 +16,9 @@ const Home = () => {
 
     const { access_token } = getToken();
     const { data, isSuccess } = useGetLoggedUserQuery(access_token);
-
+    // console.log(data)
     const dispatch = useDispatch();
+    const navigate = useNavigate()
 
     const addToCart = (product) => {
         dispatch(addtoCart(product));
@@ -65,7 +67,7 @@ const Home = () => {
                     <Button size="small" color="primary" onClick={() => addToCart(product)}>
                         Add To Cart
                     </Button>
-                    <Button size="small" color="primary" >
+                    <Button size="small" color="primary" onClick={()=> navigate(`products/${product.id}`)}>
                         Order Now
                     </Button>
                 </CardActions>

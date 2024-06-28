@@ -4,11 +4,16 @@ import { Button } from "react-bootstrap";
 import { addtoCart } from "../../features/cartSllice";
 import { useDispatch } from "react-redux";
 import axios from 'axios';
+import { getToken } from "../../services/LocalStorageService";
+import { useGetLoggedUserQuery } from "../../services/userAuthApi";
 
 const ProductDetail = () => {
     const { id } = useParams();
     const [product, setProduct] = useState(null);
+    const { access_token } = getToken()
+    const { data, isSuccess } = useGetLoggedUserQuery(access_token)
 
+    console.log(access_token)
     useEffect(() => {
         fetch(`http://127.0.0.1:8000/products/${id}`)
             .then((response) => response.json())
@@ -24,14 +29,18 @@ const ProductDetail = () => {
     const orderCLick = async(product) =>{
         try{
             const res = await axios.post('http://127.0.0.1:8000/orders/api/',{
+                user: data.id,
                 product_id: product.id,
                 product_name: product.title,
                 product_price: product.price,
-                header: {'Content_type': 'application/json'}
+            },{
+                headers: {
+                    'Authorization': `Bearer ${access_token}`
+                }
             });
             console.log(res.data)
         }catch(err){
-            console.error('Problem Placing Order', error)
+            console.error('Problem Placing Order', err)
         }
     }
 

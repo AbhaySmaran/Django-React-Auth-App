@@ -5,7 +5,7 @@ from accounts.models import User
 # Create your models here.
 
 class Cart(models.Model):
-    Buyer = models.ForeignKey(User, on_delete = models.CASCADE)
+    # Buyer = models.ForeignKey(User, on_delete = models.CASCADE)
     product_id = models.ForeignKey(Products, on_delete = models.CASCADE)
     name = models.CharField(max_length=50, blank=True)
     price = models.IntegerField()

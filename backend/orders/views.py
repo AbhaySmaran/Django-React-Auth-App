@@ -8,7 +8,7 @@ from rest_framework.permissions import IsAuthenticated
 
 # Create your views here.
 class OrdersView(APIView):
-    # permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated]
     def get(self, request,pk=None, format=None):
         if pk is not None:
             order = Orders.objects.get(pk=pk)

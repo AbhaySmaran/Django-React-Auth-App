@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { setUserToken } from '../../../features/authSlice';
 import { setUserInfo } from '../../../features/userSlice';
-import { getToken, storeToken } from '../../../services/LocalStorageService'
+import { getToken, storeToken } from '../../../services/LocalStorageService';
 import { useLoginUserMutation } from '../../../services/userAuthApi';
 
 const UserLogin = () => {

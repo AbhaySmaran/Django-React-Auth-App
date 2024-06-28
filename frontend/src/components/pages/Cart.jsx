@@ -2,10 +2,12 @@ import { useSelector,useDispatch } from "react-redux";
 import { Card,Button } from "react-bootstrap";
 import { remove } from "../../features/cartSllice";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
     const cartProducts = useSelector((state)=>state.cart)
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     const removeFromCart = (id) =>{
         dispatch(remove(id))
     }
@@ -32,6 +34,9 @@ const Cart = () => {
                                         <Button onClick={()=>removeFromCart(product.id)}>
                                             Remove From Cart
                                         </Button>
+                                        {/* <Button onClick={()=>navigate(`products/${product.id}`)}>
+                                            Order Now
+                                        </Button> */}
                                     </Card.Footer>
                                 </div>
                             </Card>

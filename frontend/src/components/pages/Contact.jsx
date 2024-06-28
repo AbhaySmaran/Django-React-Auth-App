@@ -15,7 +15,11 @@ const Contact = () => {
 
   useEffect(()=>{
     const fetchOrders = async() =>{
-      const res = await axios.get('http://127.0.0.1:8000/orders/api/')
+      const res = await axios.get('http://127.0.0.1:8000/orders/api/',{
+        headers: {
+          'Authorization': `Bearer ${access_token}`
+        }
+      })
       setMyorders(res.data)
     };
     fetchOrders();
@@ -66,7 +70,8 @@ const Contact = () => {
       <h3>Name:- {userName}</h3>
       <h4>Email: {userEmail}</h4>
       <Link to='/dashboard'><h5>Change Password</h5></Link>
-      <table clssName='table'>
+      <h3>My Orders-</h3>
+      <table className='table'>
         <thead>
           <tr>
             <th>Product Name</th>
@@ -76,7 +81,7 @@ const Contact = () => {
         </thead>
         <tbody>
           {myorders.map((item)=>(
-            <tr>
+            <tr key={item.id}>
               <td>{item.product_name}</td>
               <td>${item.product_price}</td>
               <td>{item.order_date}</td>
