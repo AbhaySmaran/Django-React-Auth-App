@@ -1,4 +1,4 @@
-import { Box, TextField, Button, Alert } from '@mui/material';
+import { Box, TextField, Button, Alert, Typography } from '@mui/material';
 import { useState,useEffect } from 'react';
 import { getToken } from '../../../services/LocalStorageService';
 import { useChangeUserPasswordMutation,useGetLoggedUserQuery } from '../../../services/userAuthApi';
@@ -9,7 +9,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 const ChangePassword = () => {
-  const [server_erroe, setServerError] = useState({});
+  const [server_error, setServerError] = useState({});
   const [server_msg,setServerMsg] = useState({});
   const dispatch = useDispatch()
   const { access_token } = getToken()
@@ -29,7 +29,7 @@ const ChangePassword = () => {
     // };
     // await changeUserPassword({actualData, access_token})
     // console.log(res)
-    await axios.post('http://127.0.0.1:8000/api/user/changepassword/',{
+    const res = await axios.post('http://127.0.0.1:8000/api/user/changepassword/',{
       password: password,
       password2: password2
     },{
@@ -38,6 +38,9 @@ const ChangePassword = () => {
       }
     })
     navigate('/')
+    if(res.errer){
+      setServerError(res.error.data.errors)
+    }
   }
   return (
     <>
@@ -45,10 +48,13 @@ const ChangePassword = () => {
         <h1>Change Password</h1>
         <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }} id="password-change-form">
           <TextField margin="normal" required fullWidth name="password" label="New Password" type="password" id="password" value={password} onChange={(e)=>setPassword(e.target.value)} />
+            {server_error.password ? <Typography>{server_error.password[0]}</Typography> : ''}
           <TextField margin="normal" required fullWidth name="password2" label="Confirm New Password" type="password" id="password2" value={password2} onChange={(e)=>setPassword2(e.target.value)} />
+            {server_error.password2 ? <Typography>{server_error.password2[0]}</Typography> : ''}
           <Box textAlign='center'>
             <Button type="submit" variant="contained" sx={{ mt: 3, mb: 2, px: 5 }}> Update </Button>
           </Box>
+          {server_error.non_field_errors ? <Alert severity='error'>{server_error.non_field_errors[0]}</Alert> : ''} 
         </Box>
       </Box>
     </>

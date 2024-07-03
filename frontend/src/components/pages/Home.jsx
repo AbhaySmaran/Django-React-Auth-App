@@ -75,6 +75,8 @@ const Home = () => {
         </Grid>
     ));
 
+    const userName = localStorage.getItem('name')
+
     return (
         <Container sx={{ display: 'flex', marginTop: 8 }}>
             <Box sx={{ width: '20%', marginRight: 2 }}>
