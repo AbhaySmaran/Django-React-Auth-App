@@ -8,6 +8,7 @@ import { addtoCart } from '../../features/cartSllice';
 import Filters from '../functions/Filters';
 import { Container, Grid, Card, CardContent, CardMedia, CardActions, Typography, Button, TextField, Box } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const Home = () => {
     const [products, setProducts] = useState([]);
@@ -20,8 +21,16 @@ const Home = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate()
 
-    const addToCart = (product) => {
-        dispatch(addtoCart(product));
+    const addToCart = async(product) => {
+        await 
+            axios.post('http://127.0.0.1:8000/api/cart/',{
+                user: data.id,
+                product_id: product.id
+            },{
+                headers: {
+                    'Authorization': `Bearer ${access_token}`
+                }
+            })
     };
 
     useEffect(() => {
