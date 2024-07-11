@@ -22,7 +22,7 @@ function App() {
       <Router>
         <Routes>
           <Route exact path='/' element={<Layout />}>
-            <Route index element={<Home />}/>
+            <Route index element={!access_token ? <LoginReg/> : <Home />}/>
             <Route path='contact' element={!access_token ? <LoginReg /> : <Contact /> } />
             <Route path='login' element={!access_token ? <LoginReg /> : <Navigate to='/' />} />
             <Route path='passwordresetemail' element={<SendPasswordResetEmail />} />
@@ -30,9 +30,9 @@ function App() {
             <Route path='products/:id' element={<ProductDetail />} />
             <Route path='dashboard' element={<Dashboard />} />
             <Route path='cart' element={!access_token ? <LoginReg/> : <Cart />}/>
+            <Route path='/products' element={<Products />} />
+            <Route path='*' element={<PageNotFound />} />
           </Route>
-          <Route path='/products' element={<Products />} />
-          <Route path='*' element={<PageNotFound />} />
         </Routes>
       </Router>
     </>

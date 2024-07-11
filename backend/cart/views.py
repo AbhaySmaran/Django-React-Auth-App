@@ -4,12 +4,13 @@ from .seralizer import CartSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
+from products.models import Products
 # Create your views here.
 
 
 class CartView(APIView):
     permission_classes = [IsAuthenticated]
-    def post(self, request, faormat=None):
+    def post(self, request, format=None):
         serializer = CartSerializer(data = request.data)
         if serializer.is_valid():
             serializer.save()

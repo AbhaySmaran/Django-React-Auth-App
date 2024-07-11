@@ -23,7 +23,7 @@ const Navbar = () => {
         <AppBar position='fixed' color='secondary'>
           <Toolbar>
             <Typography variant='h5' component='div' sx={{ flexGrow:1 }}>
-              My Store
+              Product Listing Portal
             </Typography>
             <Button component={NavLink} to='/' sx={{color: 'white' , backgroundColor: ({ isActive }) => isActive ? '#6d1b7b' : '', textTransform: 'none' }} >Home</Button>
             <Button component={NavLink} to='/contact' sx={{color: 'white', textTransform: 'none' }} >Profile</Button>
