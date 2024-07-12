@@ -25,7 +25,7 @@ const Navbar = () => {
             <Typography variant='h5' component='div' sx={{ flexGrow:1 }}>
               Product Listing Portal
             </Typography>
-            <Button component={NavLink} to='/' sx={{color: 'white' , backgroundColor: ({ isActive }) => isActive ? '#6d1b7b' : '', textTransform: 'none' }} >Home</Button>
+            <Button component={NavLink} to='/home' sx={{color: 'white' , backgroundColor: ({ isActive }) => isActive ? '#6d1b7b' : '', textTransform: 'none' }} >Home</Button>
             <Button component={NavLink} to='/contact' sx={{color: 'white', textTransform: 'none' }} >Profile</Button>
             <Button component={NavLink} to='/cart' sx={{color: 'white', textTransform: 'none' }}>Cart({cart.length})</Button>
             { access_token ? 

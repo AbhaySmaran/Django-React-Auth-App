@@ -17,7 +17,9 @@ const Home = () => {
 
     const { access_token } = getToken();
     const { data, isSuccess } = useGetLoggedUserQuery(access_token);
-    // console.log(data)
+    // console.log(data.name)
+    // const Name = data.name;
+    // localStorage.setItem('fname',Name);
     const dispatch = useDispatch();
     const navigate = useNavigate()
 
@@ -84,7 +86,7 @@ const Home = () => {
         </Grid>
     ));
 
-    const userName = localStorage.getItem('name')
+    const username = localStorage.getItem('name');
 
     return (
         <Container sx={{ display: 'flex', marginTop: 8 }}>
@@ -95,7 +97,7 @@ const Home = () => {
                 <Typography variant="h4" gutterBottom>
                     Home Page
                 </Typography>
-                {isSuccess ? <Typography variant="h6">Hello {data.name}</Typography> : <Typography variant="h6">You are not logged in</Typography>}
+                {isSuccess ? <Typography variant="h6">Hello {username}</Typography> : <Typography variant="h6">You are not logged in</Typography>}
                 <TextField
                     label="Search Product"
                     variant="outlined"
