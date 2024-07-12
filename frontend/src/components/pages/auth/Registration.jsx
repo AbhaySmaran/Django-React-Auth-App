@@ -29,7 +29,7 @@ const Registration = () => {
           }
         if (res.data) {
             storeToken(res.data.token)
-            navigate('/')
+            navigate('/home')
           }
     }
     return (

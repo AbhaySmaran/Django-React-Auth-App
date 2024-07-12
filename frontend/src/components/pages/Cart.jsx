@@ -11,6 +11,11 @@ const Cart = () => {
     const removeFromCart = (id) =>{
         dispatch(remove(id))
     }
+
+
+    const renderedCartProducts = () =>{
+        
+    }
     
     const getTotalPrice = () => {
         return cartProducts.reduce((total, product) => total + product.price, 0);

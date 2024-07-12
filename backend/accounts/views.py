@@ -12,8 +12,8 @@ def get_tokens_for_user(user):
   return {
       'refresh': str(refresh),
       'access': str(refresh.access_token),
-  }
-
+    }
+                                                            
 class UserRegistrationView(APIView):
     renderer_classes = [UserRenderer]
     def post(self,request, format=None):
@@ -27,7 +27,7 @@ class UserRegistrationView(APIView):
 
 class UserLoginView(APIView):
     renderer_classes = [UserRenderer] 
-    def post(self, request, formaat = None):
+    def post(self, request, format = None):
         serializer = UserLoginSerializer(data = request.data)
         if serializer.is_valid(raise_exception = True):
             email = serializer.data.get('email')
@@ -40,7 +40,6 @@ class UserLoginView(APIView):
                 return Response({'errors': {'non_field_errors': ['Email or Password is not valid']}}, status= status.HTTP_400_BAD_REQUEST)
         return Response(serializer.errors, status= status.HTTP_400_BAD_REQUEST)
         
-
 class UserProfileView(APIView):
     renderer_classes = [UserRenderer]
     permission_classes = [IsAuthenticated]

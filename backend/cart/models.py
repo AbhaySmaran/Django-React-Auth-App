@@ -8,3 +8,4 @@ class Cart(models.Model):
     user = models.ForeignKey(User, on_delete = models.CASCADE)
     product_id = models.ForeignKey(Products, on_delete = models.CASCADE)
     
+    

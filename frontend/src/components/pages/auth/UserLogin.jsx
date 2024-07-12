@@ -20,6 +20,7 @@ const UserLogin = () => {
       password: data.get('password'),
     }
     const res = await loginUser(actualData)
+    console.log(res)
     if (res.error) {
       setServerError(res.error.data.errors)
     }
@@ -27,7 +28,7 @@ const UserLogin = () => {
       storeToken(res.data.token) 
       let { access_token } = getToken()
       dispatch(setUserToken({access_token: access_token}))
-      navigate('/')
+      navigate('/home')
     }
   }
 

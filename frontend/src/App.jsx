@@ -22,7 +22,8 @@ function App() {
       <Router>
         <Routes>
           <Route exact path='/' element={<Layout />}>
-            <Route index element={!access_token ? <LoginReg/> : <Home />}/>
+            <Route index element={<LoginReg/>}/>
+            <Route path='home' element={<Home/>}/>
             <Route path='contact' element={!access_token ? <LoginReg /> : <Contact /> } />
             <Route path='login' element={!access_token ? <LoginReg /> : <Navigate to='/' />} />
             <Route path='passwordresetemail' element={<SendPasswordResetEmail />} />

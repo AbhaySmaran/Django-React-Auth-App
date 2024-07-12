@@ -42,7 +42,7 @@ class UserChangePasswordSerializer(serializers.Serializer):
         password2 = attrs.get('password2')
         user = self.context.get('user')
         if password != password2:
-            raise serializers.ValidationError("Passwors not magtching")
+            raise serializers.ValidationError("Passwors not matching")
         user.set_password(password)
         user.save()
         return attrs
