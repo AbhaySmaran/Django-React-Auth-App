@@ -35,6 +35,7 @@ class UserChangePasswordSerializer(serializers.Serializer):
     password = serializers.CharField(max_length = 255, style = {"input_type": "password"}, write_only = True)
     password2 = serializers.CharField(max_length = 255, style = {"input_type": "password"}, write_only = True)    
     class Meta:
+        model = User
         fields = ['password', 'password2']
         
     def validate(self, attrs):
@@ -50,6 +51,7 @@ class UserChangePasswordSerializer(serializers.Serializer):
 class SendPasswordResetEmailSerializer(serializers.Serializer):
     email = serializers.EmailField(max_length = 255)
     class Meta:
+        model = User
         fields = ['email']
 
     def validate(self, attrs):
@@ -79,6 +81,7 @@ class UserResetPasswordSerializer(serializers.Serializer):
     password = serializers.CharField(max_length = 255, style = {"input_type": "password"}, write_only = True)
     password2 = serializers.CharField(max_length = 255, style = {"input_type": "password"}, write_only = True)    
     class Meta:
+        model = User
         fields = ['password', 'password2']
         
     def validate(self, attrs):
