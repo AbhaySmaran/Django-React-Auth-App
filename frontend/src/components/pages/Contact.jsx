@@ -35,32 +35,6 @@ const Contact = () => {
   const dispatch = useDispatch()
   console.log(data)
 
-  // useEffect(()=>{
-  //   if(data && isSuccess ){
-  //     setUserData({
-  //       name: data.name,
-  //       email: data.email
-  //     })
-  //   }
-  // },[data, isSuccess])
-
-  useEffect(()=>{
-    if(data, isSuccess){
-      dispatch(setUserInfo({
-        name: data.name,
-        email: data.email 
-      }))
-    }
-  }, [data, isSuccess, dispatch])
-
-  const name = useSelector(state=> state.user.name)
-  const email = useSelector(state=> state.user.email)
-
-  if(name,email){
-    localStorage.setItem('email', email)
-    localStorage.setItem('name',name)
-  }
-
   const userName = localStorage.getItem('name')
   const userEmail = localStorage.getItem('email')
 

@@ -32,10 +32,10 @@ const UserLogin = () => {
     }
   }
 
-  let { access_token } = getToken()
-  useEffect(()=>{
-    dispatch(setUserToken({access_token: access_token}))
-  },[access_token, dispatch])
+  // let { access_token } = getToken()
+  // useEffect(()=>{
+  //   dispatch(setUserToken({access_token: access_token}))
+  // },[access_token, dispatch])
   
 
   return <>

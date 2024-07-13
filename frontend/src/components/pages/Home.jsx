@@ -9,6 +9,7 @@ import Filters from '../functions/Filters';
 import { Container, Grid, Card, CardContent, CardMedia, CardActions, Typography, Button, TextField, Box } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { setUserInfo } from '../../features/userSlice';
 
 const Home = () => {
     const [products, setProducts] = useState([]);
@@ -17,11 +18,27 @@ const Home = () => {
 
     const { access_token } = getToken();
     const { data, isSuccess } = useGetLoggedUserQuery(access_token);
-    // console.log(data.name)
-    // const Name = data.name;
-    // localStorage.setItem('fname',Name);
+    
     const dispatch = useDispatch();
     const navigate = useNavigate()
+
+    useEffect(()=>{
+        if(data, isSuccess){
+          dispatch(setUserInfo({
+            name: data.name,
+            email: data.email 
+          }))
+        }
+      }, [data, isSuccess, dispatch])
+    
+      const name = useSelector(state=> state.user.name)
+      const email = useSelector(state=> state.user.email)
+    
+      if(name,email){
+        localStorage.setItem('email', email)
+        localStorage.setItem('name',name)
+      }
+
 
     const addToCart = async(product) => {
         await 
@@ -97,7 +114,7 @@ const Home = () => {
                 <Typography variant="h4" gutterBottom>
                     Home Page
                 </Typography>
-                {isSuccess ? <Typography variant="h6">Hello {username}</Typography> : <Typography variant="h6">You are not logged in</Typography>}
+                {access_token ? <Typography variant="h6">Hello {username}</Typography> : <Typography variant="h6">You are not logged in</Typography>}
                 <TextField
                     label="Search Product"
                     variant="outlined"

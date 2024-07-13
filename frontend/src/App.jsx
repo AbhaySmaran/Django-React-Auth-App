@@ -25,10 +25,10 @@ function App() {
             <Route index element={<LoginReg/>}/>
             <Route path='home' element={<Home/>}/>
             <Route path='contact' element={!access_token ? <LoginReg /> : <Contact /> } />
-            <Route path='login' element={!access_token ? <LoginReg /> : <Navigate to='/' />} />
+            <Route path='login' element={!access_token ? <LoginReg /> : <Navigate to='/home' />} />
             <Route path='passwordresetemail' element={<SendPasswordResetEmail />} />
             <Route path='reset' element={<ResetPassword />} />
-            <Route path='products/:id' element={<ProductDetail />} />
+            <Route path='home/products/:id' element={<ProductDetail />} />
             <Route path='dashboard' element={<Dashboard />} />
             <Route path='cart' element={!access_token ? <LoginReg/> : <Cart />}/>
             <Route path='/products' element={<Products />} />
