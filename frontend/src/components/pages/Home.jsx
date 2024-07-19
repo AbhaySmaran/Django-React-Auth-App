@@ -40,11 +40,10 @@ const Home = () => {
       }
 
 
-    const addToCart = async(product) => {
-        await 
-            axios.post('http://127.0.0.1:8000/api/cart/',{
+    const addToCart = (product) => { 
+        const res = axios.post('http://127.0.0.1:8000/api/cart/',{
                 user: data.id,
-                product_id: product.id
+                product: product.id
             },{
                 headers: {
                     'Authorization': `Bearer ${access_token}`

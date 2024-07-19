@@ -6,3 +6,6 @@ class OrderSerializer(serializers.ModelSerializer):
         model = Orders
         fields = '__all__'
 
+    def create(self,validated_data):
+        return Orders.objects.create(**validated_data)
+

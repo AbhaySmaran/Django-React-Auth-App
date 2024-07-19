@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams,useNavigate } from "react-router-dom";
 import { Button } from "react-bootstrap";
-import { addtoCart } from "../../features/cartSllice";
+// import { addtoCart } from "../../features/cartSllice";
 import { useDispatch } from "react-redux";
 import axios from 'axios';
 import { getToken } from "../../services/LocalStorageService";
@@ -23,9 +23,17 @@ const ProductDetail = () => {
 
     const dispatch = useDispatch()
 
-    const addToCart = (product) =>{
-        dispatch(addtoCart(product))
-    }
+    const addToCart = async(product) => {
+        await 
+            axios.post('http://127.0.0.1:8000/api/cart/',{
+                user: data.id,
+                product: product.id
+            },{
+                headers: {
+                    'Authorization': `Bearer ${access_token}`
+                }
+            })
+    };
 
     const orderCLick = async(product) =>{
         try{

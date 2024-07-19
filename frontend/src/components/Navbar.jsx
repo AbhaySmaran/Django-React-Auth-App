@@ -27,7 +27,7 @@ const Navbar = () => {
             </Typography>
             <Button component={NavLink} to='/home' sx={{color: 'white' , backgroundColor: ({ isActive }) => isActive ? '#6d1b7b' : '', textTransform: 'none' }} >Home</Button>
             <Button component={NavLink} to='/contact' sx={{color: 'white', textTransform: 'none' }} >Profile</Button>
-            <Button component={NavLink} to='/cart' sx={{color: 'white', textTransform: 'none' }}>Cart({cart.length})</Button>
+            <Button component={NavLink} to='/cart' sx={{color: 'white', textTransform: 'none' }}>Cart</Button>
             { access_token ? 
               <Button onClick={handleLogout} sx={{color: 'white', textTransform: 'none' }} >Logout</Button>
               :

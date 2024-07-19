@@ -1,10 +1,11 @@
 from django.shortcuts import render
 from .models import Cart
-from .seralizer import CartSerializer
+from .seralizer import CartSerializer,CartViewSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from products.models import Products
+from accounts.models import User
 # Create your views here.
 
 
@@ -19,13 +20,13 @@ class CartView(APIView):
 
     def get(self, request, format=None):
         cart = Cart.objects.filter(user=request.user)
-        serializer = CartSerializer(cart, many=True)
+        cart_items = Cart.objects.select_related('product').filter(user=request.user)
+        serializer = CartViewSerializer(cart_items, many=True)
         return Response(serializer.data)
     
-    def delete(self, request, format=None):
-        id = request.data.get('id')
-        cart = Cart.objects.get(id=id)
-        cart.delete()
+    def delete(self, request, product_id=None,format=None):
+        product_id = request.data.get('product_id')
+        Cart.objects.filter(product=product_id, user=request.user).delete()
         return Response({'msg': 'Item removed from cart'})
 
 

@@ -23,6 +23,7 @@ const UserLogin = () => {
     console.log(res)
     if (res.error) {
       setServerError(res.error.data.errors)
+      console.log(res.error.data.errors)
     }
     if (res.data) {
       storeToken(res.data.token) 
