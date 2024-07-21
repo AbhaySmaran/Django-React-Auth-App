@@ -12,6 +12,8 @@ import { useSelector } from 'react-redux';
 import Products from './components/functions/Products';
 import Cart from './components/pages/Cart';
 import PageNotFound from './components/pages/PageNotFound';
+import UserLogin from './components/pages/auth/UserLogin';
+import Registration from './components/pages/auth/Registration';
 // import OrderPa
 
 function App() {
@@ -22,15 +24,16 @@ function App() {
       <Router>
         <Routes>
           <Route exact path='/' element={<Layout />}>
-            <Route index element={<LoginReg/>}/>
+            <Route index element={<Registration/>}/>
             <Route path='home' element={<Home/>}/>
-            <Route path='contact' element={!access_token ? <LoginReg /> : <Contact /> } />
-            <Route path='login' element={!access_token ? <LoginReg /> : <Navigate to='/home' />} />
+            <Route path='contact' element={!access_token ? <UserLogin /> : <Contact /> } />
+            <Route path='login' element={<UserLogin />}/*{!access_token ? <UserLogin /> : <Navigate to='/home' />}*/ />
+            <Route path='register' element={<Registration />} />
             <Route path='passwordresetemail' element={<SendPasswordResetEmail />} />
             <Route path='reset' element={<ResetPassword />} />
             <Route path='home/products/:id' element={<ProductDetail />} />
             <Route path='dashboard' element={<Dashboard />} />
-            <Route path='cart' element={!access_token ? <LoginReg/> : <Cart />}/>
+            <Route path='cart' element={!access_token ? <UserLogin/> : <Cart />}/>
             <Route path='/products' element={<Products />} />
             <Route path='*' element={<PageNotFound />} />
           </Route>

@@ -15,7 +15,7 @@ const Navbar = () => {
     dispatch(unSetUserToken({access_token: null}))
     removeToken();
     removeUser();
-    navigate('/login')
+    navigate('/')
   }
   return (
     <div>
