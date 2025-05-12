@@ -38,7 +38,7 @@ const Home = () => {
         localStorage.setItem('email', email)
         localStorage.setItem('name',name)
       }
-
+      
 
     const addToCart = (product) => { 
         const res = axios.post('http://127.0.0.1:8000/api/cart/',{

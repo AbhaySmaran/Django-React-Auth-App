@@ -33,6 +33,7 @@ const ProductDetail = () => {
                     'Authorization': `Bearer ${access_token}`
                 }
             })
+            alert('Product added to Cart')
     };
 
     const orderCLick = async(product) =>{
@@ -47,6 +48,7 @@ const ProductDetail = () => {
                     'Authorization': `Bearer ${access_token}`
                 }
             });
+            alert("Order Placed Successfully")
             navigate(-1)
             console.log(res.data)
         }catch(err){

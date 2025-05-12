@@ -12,9 +12,9 @@ class CartSerializer(serializers.ModelSerializer):
         return Cart.objects.create(**validated_data)
 
 class CartViewSerializer(serializers.ModelSerializer):
-    # user = UserProfileSerializer() 
+    user = UserProfileSerializer() 
     product = ProductSerializer()
 
     class Meta:
         model = Cart
-        fields = ['product']
+        fields = ['user','product']

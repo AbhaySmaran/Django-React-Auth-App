@@ -45,24 +45,30 @@ const Contact = () => {
       <h4>Email: {userEmail}</h4>
       <Link to='/dashboard'><h5>Change Password</h5></Link>
       <h3>My Orders-</h3>
-      <table className='table'>
-        <thead>
-          <tr>
-            <th>Product Name</th>
-            <th>Product Price</th>
-            <th>Order Date</th>
-          </tr>
-        </thead>
-        <tbody>
-          {myorders.map((item)=>(
-            <tr key={item.id}>
-              <td>{item.product_name}</td>
-              <td>${item.product_price}</td>
-              <td>{item.order_date}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      {myorders.length > 0 ? 
+        <div>
+          <table className='table'>
+            <thead>
+              <tr>
+                <th>Product Name</th>
+                <th>Product Price</th>
+                <th>Order Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              {myorders.map((item)=>(
+                <tr key={item.id}>
+                  <td>{item.product_name}</td>
+                  <td>${item.product_price}</td>
+                  <td>{item.order_date}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table> 
+        </div>
+        :
+        <h2>No Orders Yet</h2>
+      }
     </div>
   )
 }

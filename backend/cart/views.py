@@ -20,7 +20,7 @@ class CartView(APIView):
 
     def get(self, request, format=None):
         cart = Cart.objects.filter(user=request.user)
-        cart_items = Cart.objects.select_related('product').filter(user=request.user)
+        cart_items = Cart.objects.select_related('product','user').filter(user=request.user)
         serializer = CartViewSerializer(cart_items, many=True)
         return Response(serializer.data)
     

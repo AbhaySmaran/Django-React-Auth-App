@@ -1,6 +1,6 @@
 import { useSelector,useDispatch } from "react-redux";
 import { Card,Button } from "react-bootstrap";
-import { remove } from "../../features/cartSllice";
+import { remove,setToCart } from "../../features/cartSllice";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useState,useEffect } from "react";
@@ -24,6 +24,7 @@ const Cart = () => {
             }
         })
         setCartItems(res.data)
+        setToCart(res.data)
         // console.log(res.data)
         // console.log(cartItems)
     };

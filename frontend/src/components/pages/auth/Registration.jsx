@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Box, TextField, Alert, FormControlLabel, Checkbox, Typography, Grid } from '@mui/material'
+import { Button, Box, TextField, Alert, FormControlLabel, Checkbox, Typography, Grid, CircularProgress } from '@mui/material'
 import { useState } from 'react'
 import { useNavigate,NavLink } from 'react-router-dom'
 import { useRegisterUserMutation } from '../../../services/userAuthApi';
@@ -59,7 +59,7 @@ const Registration = () => {
                         <FormControlLabel control={<Checkbox value={true} color="primary" name="tc" id="tc" />} label="I agree to term and condition." />
                         {server_error.tc ? <span style={{ fontSize: 12, color: 'red', paddingLeft: 10 }}>{server_error.tc[0]}</span> : ""}
                         <Box textAlign='center'>
-                            <Button type='submit' variant='contained' sx={{ mt: 3, mb: 2, px: 5 }}>Register</Button>
+                            {isLoading ?  <CircularProgress /> : <Button type='submit' variant='contained' sx={{ mt: 3, mb: 2, px: 5 }}>Register</Button>}
                         </Box>
                         <NavLink to='/login'>Already have a account?</NavLink>
                         {server_error.non_field_errors ? <Alert severity='error'>{server_error.non_field_errors[0]}</Alert> : ''}
